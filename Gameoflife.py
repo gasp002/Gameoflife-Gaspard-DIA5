@@ -18,6 +18,18 @@ def print_grid(grid):
         print()
     print()
 
+def get_user_initial_state(rows, cols):
+    print("Enter the initial state. Use '#' for live cells and ' ' for dead cells.")
+    user_grid = initialize_grid(rows, cols)
+
+    for i in range(rows):
+        row_input = input(f"Row {i + 1}: ").strip()
+        user_grid[i][:len(row_input)] = row_input
+
+    return user_grid
+
+
+
 def count_neighbors(grid, x, y):
     neighbors = 0
     directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
@@ -47,7 +59,16 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main(rows, cols, generations):
-    grid = initialize_grid(rows, cols)
+
+    grid = get_user_initial_state(rows, cols)
+
+    for _ in range(generations):
+        clear_console()
+        print_grid(grid)
+        time.sleep(0.5)
+        grid = update_grid(grid)
+
+    
 
     
     grid[1][2] = '#'
