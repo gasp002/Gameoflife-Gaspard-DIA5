@@ -77,8 +77,9 @@ def main(rows, cols, generations):
     grid[3][2] = '#'
     grid[3][3] = '#'
 
-    for _ in range(generations):
+    for i in range(generations):
         clear_console()
+        print("Iteration number : ", i+1)
         print_grid(grid)
         time.sleep(0.5)  
         grid = update_grid(grid)
